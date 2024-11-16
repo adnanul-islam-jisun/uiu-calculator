@@ -1,0 +1,806 @@
+:root {
+    --primary-color: #FFB347; /* Yellow-Orange */
+    --secondary-color: #FFD700; /* Light Yellow */
+    --accent-color: #FFA07A; /* Light Salmon */
+    --background-color: #FFF8DC; /* Cornsilk */
+    --text-color: #4A4A4A; /* Dark Gray */
+    --white: #ffffff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+header {
+    background-color: var(--primary-color);
+    padding: 1rem;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    color: var(--text-color);
+    gap: 1rem;
+}
+
+.logo {
+    font-size: 1.5rem;
+}
+
+h1 {
+    text-align: center;
+    font-size: 1.8rem;
+}
+
+main {
+    max-width: 100%;
+    padding: 1rem;
+    margin: 1rem auto;
+    display: grid;
+    grid-template-columns: minmax(0, 4fr) minmax(0, 1fr);
+    gap: 1rem;
+}
+
+.input-group {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.input-group input {
+    flex: 1;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.course-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;  /* Updated to make all columns equal width */
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.course-label {
+    padding: 0.8rem;
+    border: 1px solid var(--accent-color);
+    border-radius: 4px;
+    background-color: var(--white);
+    display: flex;
+    align-items: center;
+}
+
+select {
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+}
+
+button {
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.reset-btn {
+    background-color: var(--white);
+    color: var(--text-color);
+    border: 1px solid var(--primary-color);
+}
+
+.add-more-btn, .retake-btn {
+    background-color: var(--white);
+    color: var(--text-color);
+    border: 1px solid var(--primary-color);
+}
+
+footer {
+    padding: 2rem;
+    text-align: center;
+    background-color: var(--primary-color);
+    color: var(--text-color);
+}
+
+.calculate-btn {
+    background-color: var(--accent-color);
+    color: var(--text-color);
+    padding: 1rem 3rem;
+    font-size: 1.1rem;
+    display: block;
+    margin: 2rem auto;
+    width: 200px;
+}
+
+button:hover {
+    opacity: 0.9;
+    transform: scale(0.98);
+}
+
+.calculator-section {
+    display: block;
+    padding: 2rem 4rem 2rem 2rem; /* Increased padding */
+}
+
+.grading-policy-section {
+    display: block;
+    border-left: 1px solid #ddd;
+    padding: 0 2rem 0 1rem; /* Increased right padding to 2rem */
+    max-height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden; /* Prevent horizontal scroll */
+    position: sticky;
+    top: 1rem;
+    width: 100%; /* Ensure full width */
+}
+
+.grade-table {
+    width: 100%;
+    table-layout: fixed; /* Force table to respect container width */
+    border-collapse: collapse;
+    margin: 1rem 0; /* Reduced margin */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    font-size: 0.8rem; /* Added smaller font size */
+}
+
+.grade-table th,
+.grade-table td {
+    padding: 0.5rem; /* Reduced padding */
+    text-align: center;
+    border: 1px solid #ddd;
+    word-wrap: break-word; /* Allow text to wrap */
+    white-space: normal; /* Allow text to wrap */
+}
+
+.grade-table thead {
+    background-color: var(--primary-color);
+    color: var(--text-color);
+}
+
+.grade-table tbody tr:nth-child(even) {
+    background-color: #f8f8f8;
+}
+
+.grade-table tbody tr:hover {
+    background-color: #f0f0f0;
+}
+
+.grade-table {
+    margin-top: 0;
+}
+
+@media (max-width: 768px) {
+    .input-group {
+        flex-direction: column;
+    }
+    
+    .course-row {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+    }
+    
+    .button-group {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    button {
+        width: 100%;
+    }
+    
+    main {
+        grid-template-columns: 1fr;
+    }
+    
+    .grading-policy-section {
+        max-height: none;
+        position: static;
+        padding: 1rem;
+        margin-top: 2rem;
+        border-left: none;
+        border-top: 1px solid #ddd;
+    }
+    
+    .calculator-section {
+        padding: 1rem; /* Reset padding for mobile */
+    }
+}
+
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.popup-content {
+    background-color: var(--white);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 90%;
+}
+
+.popup-content h2 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.popup-content p {
+    margin: 0.5rem 0;
+    font-size: 1.1rem;
+}
+
+.close-popup {
+    margin-top: 1rem;
+    background-color: var(--accent-color);
+    color: var(--text-color);
+    width: 100%;
+}
+
+.remove-btn {
+    padding: 0.8rem;
+    width: 100%;
+    color: #666;
+    background: var(--white);
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.remove-btn:hover {
+    background-color: #f5f5f5;
+}
+
+.retake-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+/* Add border only to header row */
+.retake-row:first-of-type {
+    padding-top: 1rem;
+    border-top: 2px dashed var(--primary-color);
+}
+
+.retake-header {
+    color: var(--text-color);
+    font-weight: bold;
+    padding: 0.8rem;
+    text-align: center;
+}
+
+/* Make inputs more touch-friendly */
+input, select, button {
+    min-height: 44px; /* Minimum touch target size */
+    font-size: 16px; /* Prevent zoom on iOS */
+}
+
+/* Improved responsive breakpoints */
+@media (max-width: 1200px) {
+    main {
+        max-width: 95%;
+    }
+}
+
+@media (max-width: 992px) {
+    main {
+        grid-template-columns: 3fr 1fr;
+    }
+    
+    .grading-policy-section {
+        padding: 0 1rem;
+        max-height: 400px;
+    }
+}
+
+@media (max-width: 768px) {
+    main {
+        grid-template-columns: 1fr;
+    }
+    
+    .header-content {
+        padding: 0.5rem;
+    }
+    
+    .course-row {
+        grid-template-columns: 1fr 1fr;
+        gap: 0.5rem;
+    }
+    
+    .course-label {
+        grid-column: 1 / -1;
+    }
+    
+    .retake-row {
+        grid-template-columns: 1fr 1fr;
+        gap: 0.5rem;
+    }
+    
+    .retake-header {
+        display: none;
+    }
+    
+    .calculate-btn {
+        width: 100%;
+        max-width: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .input-group {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .course-row, .retake-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .popup-content {
+        width: 95%;
+        padding: 1rem;
+    }
+    
+    .grade-table {
+        font-size: 0.7rem;
+    }
+    
+    .grade-table th,
+    .grade-table td {
+        padding: 0.25rem;
+    }
+}
+
+/* Add touch-specific improvements */
+@media (hover: none) {
+    button {
+        padding: 1rem;
+    }
+    
+    select {
+        padding-right: 2rem;
+    }
+}
+
+/* Add landscape mode optimization */
+@media (max-height: 600px) and (orientation: landscape) {
+    main {
+        grid-template-columns: 1fr;
+        margin: 0.5rem auto;
+    }
+    
+    .header-content {
+        padding: 0.5rem;
+    }
+    
+    .grade-table {
+        display: none;
+    }
+}
+
+/* Make table responsive */
+.grade-table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin: 0 -1rem;
+    padding: 0.5rem;
+    background: var(--white);
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.grade-table {
+    min-width: 300px;
+}
+
+/* Add smooth transitions */
+.course-row, .retake-row, button, .popup {
+    transition: all 0.3s ease;
+}
+
+/* Fix iOS input styling */
+input {
+    -webkit-appearance: none;
+    appearance: none;
+    border-radius: 4px;
+}
+
+/* Improve accessibility */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
+    }
+}
+
+footer {
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    padding: 2rem;
+    text-align: center;
+    margin-top: auto;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    gap: 1.5rem;
+}
+
+.footer-info, .footer-contact {
+    text-align: center;
+}
+
+.footer-contact a {
+    color: var(--text-color);
+    text-decoration: none;
+    margin: 0 0.5rem;
+    transition: opacity 0.3s ease;
+}
+
+.footer-contact a:hover {
+    opacity: 0.8;
+}
+
+.footer-version {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+@media (max-width: 768px) {
+    .footer-content {
+        gap: 1rem;
+    }
+}
+
+/* ...existing code... */
+
+body {
+    background-color: var(--background-color);
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Add these new styles */
+body::before {
+    content: 'UIU Calculator';
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-30deg);
+    font-size: 15vw;
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.03);
+    white-space: nowrap;
+    pointer-events: none;
+    z-index: 0;
+    font-family: Arial, sans-serif;
+    width: 100%;
+    text-align: center;
+}
+
+/* Ensure other content stays above the background text */
+header, main, footer {
+    position: relative;
+    z-index: 1;
+}
+
+/* ...existing code... */
+
+.header-nav {
+    display: flex;
+    gap: 1.5rem;
+    margin-left: 2rem;
+}
+
+.nav-link {
+    color: var(--text-color);
+    text-decoration: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    background-color: var(--white);
+    border: 2px solid var(--primary-color);
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.nav-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.nav-link.active {
+    background-color: var(--primary-color);
+    color: var(--white);
+    border-color: var(--white);
+}
+
+.nav-link i {
+    font-size: 1.2rem;
+}
+
+@media (max-width: 768px) {
+    .header-nav {
+        gap: 1rem;
+        margin-left: 0;
+    }
+    
+    .nav-link {
+        padding: 0.6rem 1rem;
+        font-size: 0.9rem;
+    }
+}
+
+.credit-inputs {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.credit-inputs input {
+    padding-left: 10px;
+}
+
+.credit-inputs input::placeholder {
+    padding-left: px;
+}
+
+.credit-inputs select {
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: var(--white);
+    color: var(--text-color);
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    .credit-inputs {
+        grid-template-columns: 1fr;
+    }
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.section-header i {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+}
+
+.radio-group {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.radio-group label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+}
+
+.waiver-section,
+.scholarship-section,
+.late-registration-section {
+    background-color: var(--white);
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.fee-sections-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.fee-sections-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.late-registration-section {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.radio-group {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.radio-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+}
+
+.radio-custom {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border: 2px solid var(--primary-color);
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+input[type="radio"] {
+    display: none;
+}
+
+input[type="radio"]:checked + .radio-custom {
+    background-color: var(--primary-color);
+    color: var(--white);
+}
+
+.calculator-section .calculate-btn {
+    border: 2px solid var(--primary-color);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.calculator-section .calculate-btn:hover {
+    background-color: var(--primary-color);
+    color: var(--white);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 768px) {
+    .credit-inputs {
+        grid-template-columns: 1fr;
+    }
+    
+    .radio-group {
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+    
+    .header-nav {
+        flex-direction: column;
+        gap: 0.5rem;
+        margin-left: 0;
+    }
+    
+    .fee-sections-row {
+        grid-template-columns: 1fr;
+    }
+
+    .radio-group {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .radio-label {
+        min-width: 80px;
+        justify-content: center;
+    }
+}
+
+/* ...existing code... */
+
+.fee-calculator-section {
+    padding: 3rem 10rem 3rem 10rem;
+}
+
+/* When screen size is 768px or less */
+@media (max-width: 768px) {
+    .fee-calculator-section {
+        padding: 1rem;
+    }
+}
+
+/* ...existing code... */
+
+/* ...existing code... */
+
+.results-header {
+    text-align: center;
+    color: var(--text-color);
+    margin: 2rem 0 1rem;
+}
+
+.results-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    background: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.results-table tr {
+    border-bottom: 1px solid #eee;
+}
+
+.results-table td {
+    padding: 1rem;
+}
+
+.results-table td:first-child {
+    font-weight: bold;
+}
+
+.results-table td:last-child {
+    text-align: right;
+}
+
+.total-row {
+    background-color: var(--primary-color);
+    font-weight: bold;
+}
+
+.deduction-row {
+    color: #ff4444;
+}
+
+/* ...existing code... */
+
+/* ...existing styles... */
+
+.installment-table {
+    margin-top: 2rem;
+}
+
+.installment-table th {
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    padding: 1rem;
+    text-align: left;
+}
+
+.installment-table td {
+    padding: 1rem;
+}
+
+.installment-table td:last-child {
+    text-align: right;
+    font-weight: bold;
+}
+
+/* For mobile responsiveness */
+@media (max-width: 480px) {
+    .installment-table th,
+    .installment-table td {
+        padding: 0.5rem;
+        font-size: 0.9rem;
+    }
+}
